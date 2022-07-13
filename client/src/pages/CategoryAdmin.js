@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router';
 import NavbarAdmin from '../components/NavbarAdmin';
 import DeleteData from '../components/modal/DeleteData';
 
+import categories from "../fakeData/category"
+
 import imgEmpty from '../assets/empty.svg';
 
 export default function CategoryAdmin() {
@@ -68,7 +70,7 @@ export default function CategoryAdmin() {
                         >
                           Edit
                         </Button>
-                        <Button
+                        {/* <Button
                           onClick={() => {
                             handleDelete(item.id);
                           }}
@@ -76,7 +78,7 @@ export default function CategoryAdmin() {
                           style={{ width: '135px' }}
                         >
                           Delete
-                        </Button>
+                        </Button> */}
                       </td>
                     </tr>
                   ))}
@@ -96,11 +98,11 @@ export default function CategoryAdmin() {
           </Col>
         </Row>
       </Container>
-      <DeleteData
+      {/* <DeleteData
         setConfirmDelete={setConfirmDelete}
         show={show}
         handleClose={handleClose}
-      />
+      /> */}
     </>
   );
 }

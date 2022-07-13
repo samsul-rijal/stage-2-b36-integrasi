@@ -3,12 +3,15 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 // Import useMutation from react-query here ...
+import { useMutation } from 'react-query';
+
 
 import NavbarAdmin from '../components/NavbarAdmin';
 
 import dataCategory from '../fakeData/category';
 
 // Get API config here ...
+import { API } from '../config/api';
 
 export default function AddCategoryAdmin() {
   console.clear();
@@ -16,6 +19,7 @@ export default function AddCategoryAdmin() {
   let navigate = useNavigate();
 
   // Create variabel for store data with useState here ...
+  const [category, setCategory] = useState("");
 
   const title = 'Category admin';
   document.title = 'DumbMerch | ' + title;
@@ -25,6 +29,29 @@ export default function AddCategoryAdmin() {
   };
 
   // Create function for handle insert category data with useMutation here ...
+
+  const handleSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+  
+      // Configuration Content-type
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+  
+      // Data body
+      const body = JSON.stringify({name: category});
+  
+      // Insert data user to database
+      const response = await API.post('/category', body, config);
+      console.log(response);
+      // Handling response here
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   return (
     <>

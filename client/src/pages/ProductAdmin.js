@@ -7,6 +7,8 @@ import rupiahFormat from 'rupiah-format';
 import NavbarAdmin from '../components/NavbarAdmin';
 import DeleteData from '../components/modal/DeleteData';
 
+import products from "../fakeData/product"
+
 import imgEmpty from '../assets/empty.svg';
 
 export default function ProductAdmin() {
@@ -101,7 +103,7 @@ export default function ProductAdmin() {
                         >
                           Edit
                         </Button>
-                        <Button
+                        {/* <Button
                           onClick={() => {
                             handleDelete(item.id);
                           }}
@@ -109,7 +111,7 @@ export default function ProductAdmin() {
                           style={{ width: '135px' }}
                         >
                           Delete
-                        </Button>
+                        </Button> */}
                       </td>
                     </tr>
                   ))}
@@ -129,11 +131,11 @@ export default function ProductAdmin() {
           </Col>
         </Row>
       </Container>
-      <DeleteData
+      {/* <DeleteData
         setConfirmDelete={setConfirmDelete}
         show={show}
         handleClose={handleClose}
-      />
+      /> */}
     </>
   );
 }

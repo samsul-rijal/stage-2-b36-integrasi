@@ -10,6 +10,8 @@ import ProductCard from '../components/card/ProductCard';
 
 import imgEmpty from '../assets/empty.svg';
 
+import products from "../fakeData/product"
+
 export default function Product() {
   const title = 'Shop';
   document.title = 'DumbMerch | ' + title;
