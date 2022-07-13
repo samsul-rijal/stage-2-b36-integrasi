@@ -4,6 +4,7 @@ import dateFormat from 'dateformat';
 import convertRupiah from 'rupiah-format';
 
 // Import useQuery here ...
+import { useQuery } from 'react-query';
 
 import Navbar from '../components/Navbar';
 
@@ -14,6 +15,7 @@ import { UserContext } from '../context/userContext';
 import imgBlank from '../assets/blank-profile.png';
 
 // Get API config here ...
+import { API } from '../config/api';
 
 export default function Profile() {
   const title = 'Profile';
@@ -22,9 +24,17 @@ export default function Profile() {
   const [state] = useContext(UserContext);
 
   // Create process for fetching profile data from database with useQuery here ...
-
+  // Fetching product data from database
+  let { data: profile } = useQuery('profileCache', async () => {
+    const response = await API.get('/profile');
+    return response.data.data;
+  });
   // Create process for fetching transactions data from database with useQuery here ...
-
+  let { data: transactions } = useQuery('transactionsCache', async () => {
+    const response = await API.get('/transactions');
+    return response.data.data;
+  });
+  
   return (
     <>
       <Navbar title={title} />
