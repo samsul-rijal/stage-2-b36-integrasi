@@ -15,8 +15,21 @@ export default function UpdateCategoryAdmin() {
   const { id } = useParams();
 
   // Create Variabel for store category data here ...
+  const [category, setCategory] = useState({ name: '' });
 
   // Create function get category data by id from database here ...
+  // Fetching category data by id from database
+  let { data: categoryData } = useQuery('categoryCache', async () => {
+    const response = await API.get('/category/' + id);
+    return response.data.data.name;
+  });
+
+  useEffect(() => {
+    if (categoryData) {
+      console.log(categoryData);
+      setCategory({ name: categoryData });
+    }
+  }, [categoryData]);
 
   const handleChange = (e) => {
     setCategory({
@@ -26,7 +39,25 @@ export default function UpdateCategoryAdmin() {
   };
 
   // Create function for handle submit data ...
-
+  const handleSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+  
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+  
+      const body = JSON.stringify(category);
+  
+      await API.patch('/category/' + id, body, config);
+  
+      navigate('/category-admin');
+    } catch (error) {
+      console.log(error);
+    }
+  });
   return (
     <>
       <NavbarAdmin title={title} />
@@ -36,7 +67,7 @@ export default function UpdateCategoryAdmin() {
             <div className="text-header-category mb-4">Edit Category</div>
           </Col>
           <Col xs="12">
-            <form>
+            <form onSubmit={(e) => handleSubmit.mutate(e)}>
               <input
                 onChange={handleChange}
                 value={category.name}
